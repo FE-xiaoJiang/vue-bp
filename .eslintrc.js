@@ -50,5 +50,6 @@ module.exports = {
     'semi': 0,
     'space-before-function-paren': 0,
     'no-console': 0,
+    'linebreak-style': 0
   }
 }

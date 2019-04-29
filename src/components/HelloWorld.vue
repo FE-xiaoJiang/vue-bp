@@ -58,7 +58,8 @@ export default {
 
     },
     cancelHandler() {
-
+      console.log('cancelHandler...');
+      this.$store.commit('undoAll');
     },
     nameHandler(e) {
       console.log('name====>', e.target.value);

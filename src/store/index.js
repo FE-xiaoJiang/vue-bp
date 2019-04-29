@@ -39,6 +39,13 @@ const store = new Vuex.Store({
         }
       }
     },
+    undoAll(state) {
+      if (!state.pasts.length) {
+        return;
+      }
+      state.present = state.pasts[0];
+      state.pasts = [];
+    },
     undo(state) {
       if (!state.pasts.length) {
         return;
