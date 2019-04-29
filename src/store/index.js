@@ -10,7 +10,7 @@ import _ from 'lodash';
 Vue.use(Vuex);
 const store = new Vuex.Store({
   state: {
-    pasts: [],
+    pasts: null,
     futures: [],
     present: {
 
@@ -18,12 +18,12 @@ const store = new Vuex.Store({
   },
   mutations: {
     setPresent(state, payload) {
+      const tmp = _.cloneDeep(payload.present);
+      state.pasts = tmp;
       state.present = payload.present;
     },
     doing(state, payload) {
-      const tmp = _.cloneDeep(state.present);
-      state.pasts.push(tmp);
-      state.futures = [];
+      // state.futures = [];
       switch (payload.type) {
         case 'delete_hobby': {
           state.present.hobbies.splice(payload.i, 1);
@@ -40,11 +40,12 @@ const store = new Vuex.Store({
       }
     },
     undoAll(state) {
-      if (!state.pasts.length) {
+      debugger
+      if (!Object.keys(state.pasts).length) {
         return;
       }
-      state.present = state.pasts[0];
-      state.pasts = [];
+      state.present = state.pasts;
+      state.pasts = null;
     },
     undo(state) {
       if (!state.pasts.length) {
